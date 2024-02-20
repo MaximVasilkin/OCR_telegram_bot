@@ -4,8 +4,8 @@ from aiogram.filters.command import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import BufferedInputFile, ErrorEvent, Message
 from .middlewares import ChatActionMiddleware
-from bot.OCR.converter import image_to_text, convert_pdf
-from bot.interface import menu
+from ..OCR.converter import image_to_text, convert_pdf
+from ..interface import menu
 from .utils import split_and_send, DocumentManager
 
 
@@ -36,7 +36,6 @@ async def cmd_start(message: types.Message, state: FSMContext):
 
     #  Отправка главного меню
     await menu.main.send_menu(message)
-    0/0
 
 
 @router.message(F.document.mime_type == 'application/pdf', flags={'long_operation': 'upload_document'})

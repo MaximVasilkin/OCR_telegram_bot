@@ -1,9 +1,9 @@
 from asyncio import run
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
-from core.handlers import router
+from bot.core.handlers import router
 from os import getenv
-from core.config import set_logging
+from bot.core.config import set_logging
 
 
 async def start_bot(token: str,
@@ -34,7 +34,7 @@ async def start_bot(token: str,
 
 if __name__ == '__main__':
     token = getenv('tg_bot_token')
-    logging_file = 'bot/errors.txt'
+    logging_file = 'errors.txt'
     logging_format = '%(asctime)s - %(levelname)s - %(message)s'
 
     run(start_bot(token, logging_file, logging_format, ParseMode.HTML, drop_pending_updates=True))

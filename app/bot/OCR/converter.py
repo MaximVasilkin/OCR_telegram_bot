@@ -5,19 +5,20 @@ import easyocr
 import fitz
 import numpy as np
 from pdf2docx import Converter
-from bot.core.config import LANGUAGES
+from ..core.config import LANGUAGES
 
 
-@lru_cache(maxsize=5)
-def get_reader(languages: tuple) -> easyocr.Reader:
+@lru_cache(maxsize=3)
+def get_reader(languages: tuple, gpu: bool = False) -> easyocr.Reader:
     """
     Функция кеширует и возвращает объект распознания изображений.
 
     :param languages: список распознаваемых языков.
+    :param gpu: использовать ли видеокарту (с ней быстрее).
     :return: объект распознания изображений.
     """
 
-    return easyocr.Reader(list(languages))
+    return easyocr.Reader(list(languages), gpu=gpu)
 
 
 def pre_process_image(image: bytes) -> bytes:
