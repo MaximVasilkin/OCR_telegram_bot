@@ -1,9 +1,9 @@
 from asyncio import run
 from aiogram import Bot, Dispatcher
 from aiogram.enums import ParseMode
-from bot.core.handlers import router
+from ocr_bot.core.handlers import router
 from os import getenv
-from bot.core.config import set_logging
+from ocr_bot.core.config import set_logging
 
 
 async def start_bot(token: str,
