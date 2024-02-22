@@ -49,6 +49,6 @@ async def split_and_send(message: Message, text: str, char_limit: int = CHAR_LIM
             await sleep(0.33)
             await message.answer(text_chunk)
     else:
-        await message.answer(text)
+        await message.answer(text, parse_mode=None)
 
 

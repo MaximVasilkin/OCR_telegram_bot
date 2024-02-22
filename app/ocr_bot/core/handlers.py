@@ -1,3 +1,4 @@
+import asyncio
 import logging
 from aiogram import types, F, Router
 from aiogram.filters.command import CommandStart
@@ -51,7 +52,7 @@ async def pdf_converter(message: types.Message):
     async with DocumentManager(message) as file_bytes_io:  # неявное скачивание присланного документа в виде байтов
 
         # распознание и конвертация
-        convert_pdf(file_bytes_io)
+        await asyncio.to_thread(convert_pdf, file_bytes_io)
 
         # подготовка к отправке распознанного текста
         document = BufferedInputFile(file_bytes_io.getvalue(), filename=f'{doc_name}.docx')
@@ -69,7 +70,7 @@ async def img_to_text(message: types.Message):
     async with DocumentManager(message) as file_bytes_io:  # неявное скачивание присланного документа в виде байтов
 
         #  распознание картинки в список строк
-        sentences = image_to_text(file_bytes_io.getvalue())
+        sentences = await asyncio.to_thread(image_to_text, file_bytes_io.getvalue())
 
     text = ' '.join(sentences)
 
